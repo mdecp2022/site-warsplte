@@ -312,10 +312,9 @@ doc["aitetris"].bind("click", aitetris.do)
 </span><span class="cm-line"><span class="cm-comment"># 利用 "1b" 作為輸入從 get_stud() 取出該班修課學員學號數列</span>
 </span><span class="cm-line"><span class="cm-variable">cp_stud</span> <span class="cm-operator">=</span> <span class="cm-variable">get_stud</span>(<span class="cm-string">"1b"</span>)
 </span><span class="cm-line">
-</span><span class="cm-line"><span class="cm-comment"># get w10 quiz result</span>
-</span><span class="cm-line"><span class="cm-comment"># # 以下為 1b w10 quiz 考試結果的 JSON 檔案</span>
-</span><span class="cm-line"><span class="cm-variable">cp_w10_quiz_url</span> <span class="cm-operator">=</span> <span class="cm-string">"https://gist.githubusercontent.com/mdecycu/9df4b372ac1b7386cf259ced15f1a2b2/raw/a6825f13b1bb0b61e09e74dd117729eefe1d947f/20221110_cp1b_w10_quiz.json"</span>
-</span><span class="cm-line">
+</span><span class="cm-line"><span class="cm-comment"># get w14 quiz result</span>
+</span><span class="cm-line"><span class="cm-comment"># # 以下為 1b w14 quiz 考試結果的 JSON 檔案</span>
+</span><span class="cm-line"><span class="cm-variable">cp_w10_quiz_url</span> <span class="cm-operator">=</span> <span class="cm-string">"</span></span><span class="cm-line">https://gist.githubusercontent.com/mdecycu/9df4b372ac1b7386cf259ced15f1a2b2/raw/a0be253dc36fb3d0d2e1878950dae0b13d07a8f6/2022_1208_cp_w14_1b_quiz.json"
 </span><span class="cm-line"><span class="cm-keyword">def</span> <span class="cm-def">get_score</span>(<span class="cm-variable">url</span>):
 </span><span class="cm-line">    <span class="cm-comment"># 利用 open() 與 read() 讀取考試結果 JSON 檔案</span>
 </span><span class="cm-line">    <span class="cm-variable">json_data</span> <span class="cm-operator">=</span> <span class="cm-builtin">open</span>(<span class="cm-variable">url</span>).<span class="cm-property">read</span>()
@@ -354,7 +353,7 @@ doc["aitetris"].bind("click", aitetris.do)
 </span><span class="cm-line">        <span class="cm-variable">cp_abs</span>.<span class="cm-property">append</span>(<span class="cm-variable">stud</span>)
 </span><span class="cm-line"><span class="cm-comment"># 列出缺考名單</span>
 </span><span class="cm-line"><span class="cm-builtin">print</span>(<span class="cm-string">"="</span><span class="cm-operator">*</span><span class="cm-number">20</span>)
-</span><span class="cm-line"><span class="cm-builtin">print</span>(<span class="cm-string">"以下為 w10 缺考名單:"</span>)
+</span><span class="cm-line"><span class="cm-builtin">print</span>(<span class="cm-string">"以下為 w14 缺考名單:"</span>)
 </span><span class="cm-line"><span class="cm-comment"># 因為 cp_abs 資料為 list, 在此利用 for 迴圈逐一列出</span>
 </span><span class="cm-line"><span class="cm-keyword">for</span> <span class="cm-variable">stud</span> <span class="cm-keyword">in</span> <span class="cm-variable">cp_abs</span>:
 </span><span class="cm-line">    <span class="cm-builtin">print</span>(<span class="cm-variable">stud</span>)</span></pre>

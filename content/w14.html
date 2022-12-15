@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li><a href='Brython.html'>Brython</a><li class='has-children'><a href='HW.html'>HW</a><ul class='dropdown'><li><a href='w11.html'>w11</a><li><a href='w12.html'>w12</a><li><a href='w13.html'>w13</a><li class='has-children'><a href='w14.html'>w14</a><ul class='dropdown'><li><a href='缺考人員名單.html'>缺考人員名單</a></li></ul><li><a href='w15.html'>w15</a></li>
+                     <li><a href='About.html'>About</a><li><a href='Brython.html'>Brython</a><li class='has-children'><a href='HW.html'>HW</a><ul class='dropdown'><li><a href='w11.html'>w11</a><li><a href='w12.html'>w12</a><li><a href='w13.html'>w13</a><li><a href='w14.html'>w14</a><li><a href='w15.html'>w15</a></li>
                       </ul>
                 </nav>
               </div>
@@ -141,8 +141,81 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w13 << <a href='w13.html'>Previous</a> <a href='缺考人員名單.html'>Next</a> >> 缺考人員名單<br /><h1>w14</h1>
-<br />w13 << <a href='w13.html'>Previous</a> <a href='缺考人員名單.html'>Next</a> >> 缺考人員名單</div>
+    <div id="tipue_search_content">w13 << <a href='w13.html'>Previous</a> <a href='w15.html'>Next</a> >> w15<br /><h1>w14</h1>
+<p>缺考人員名單</p>
+<p>程式</p>
+<div style="box-sizing: border-box; font-family: 'Cascadia Mono', Consolas, ui-monospace, Menlo, Monaco, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; word-spacing: 0px;">
+<pre><span class="cm-line"><span class="cm-comment"># 導入 ast 模組是希望利用其 literal_eval() 將 dict 格式的字串轉為 dict 資料型別</span>
+</span><span class="cm-line"><span class="cm-comment"># 以利隨後的取值運算</span>
+</span><span class="cm-line"><span class="cm-keyword">import</span> <span class="cm-variable">ast</span>
+</span><span class="cm-line">
+</span><span class="cm-line"><span class="cm-comment"># 定義一個函式, 以班級代號字串作為輸入, 可以傳回各班修課學員的學號數列</span>
+</span><span class="cm-line"><span class="cm-keyword">def</span> <span class="cm-def">get_stud</span>(<span class="cm-variable">c_name</span>):
+</span><span class="cm-line">    <span class="cm-comment"># 將課程的班級代號字串作為 dict 的 key, 而 2022 fall 的課程代號作為對應值</span>
+</span><span class="cm-line">    <span class="cm-comment"># 使用者可以利用班級代號從 courses dict 取出課程代號</span>
+</span><span class="cm-line">    <span class="cm-variable">courses</span> <span class="cm-operator">=</span> {<span class="cm-string">"1a"</span>: <span class="cm-string">"0747"</span>, <span class="cm-string">"1b"</span>: <span class="cm-string">"0761"</span>, <span class="cm-string">"2a"</span>: <span class="cm-string">"0773"</span>, <span class="cm-string">"2b"</span>: <span class="cm-string">"0786"</span>}
+</span><span class="cm-line">    <span class="cm-comment"># 利用 c_name 從 courses 得到該學期的課程代號</span>
+</span><span class="cm-line">    <span class="cm-variable">c</span> <span class="cm-operator">=</span> <span class="cm-variable">courses</span>[<span class="cm-variable">c_name</span>]
+</span><span class="cm-line">    <span class="cm-comment"># 利用課程代號從學校教務主機取的該班修課人員名單</span>
+</span><span class="cm-line">    <span class="cm-variable">url</span> <span class="cm-operator">=</span> <span class="cm-string">"https://nfu.cycu.org/?semester=1111&amp;courseno="</span> <span class="cm-operator">+</span> <span class="cm-variable">c</span> <span class="cm-operator">+</span> <span class="cm-string">"&amp;column=True"</span>
+</span><span class="cm-line">    <span class="cm-comment"># 讀出各修課人員資料後, 以跳行符號切割, 得到的 data 為數列</span>
+</span><span class="cm-line">    <span class="cm-variable">data</span> <span class="cm-operator">=</span> <span class="cm-builtin">open</span>(<span class="cm-variable">url</span>).<span class="cm-property">read</span>().<span class="cm-property">split</span>(<span class="cm-string">"\n"</span>)
+</span><span class="cm-line">    <span class="cm-comment"># 因為最後一筆資料為空字串, 因此利用數列運算將其去除</span>
+</span><span class="cm-line">    <span class="cm-variable">stud</span> <span class="cm-operator">=</span> <span class="cm-variable">data</span>[:<span class="cm-operator">-</span><span class="cm-number">1</span>]
+</span><span class="cm-line">    <span class="cm-comment"># get_stud() 函式最後將對應班級的修課人員學號以數列格式傳回</span>
+</span><span class="cm-line">    <span class="cm-keyword">return</span> <span class="cm-variable">stud</span>
+</span><span class="cm-line">
+</span><span class="cm-line"><span class="cm-comment"># 利用 "1b" 作為輸入從 get_stud() 取出該班修課學員學號數列</span>
+</span><span class="cm-line"><span class="cm-variable">cp_stud</span> <span class="cm-operator">=</span> <span class="cm-variable">get_stud</span>(<span class="cm-string">"1b"</span>)
+</span><span class="cm-line">
+</span><span class="cm-line"><span class="cm-comment"># get w14 quiz result</span>
+</span><span class="cm-line"><span class="cm-comment"># # 以下為 1b w14 quiz 考試結果的 JSON 檔案</span>
+</span><span class="cm-line"><span class="cm-variable">cp_w10_quiz_url</span> <span class="cm-operator">=</span> <span class="cm-string">"</span></span><span class="cm-line">https://gist.githubusercontent.com/mdecycu/9df4b372ac1b7386cf259ced15f1a2b2/raw/a0be253dc36fb3d0d2e1878950dae0b13d07a8f6/2022_1208_cp_w14_1b_quiz.json"
+</span><span class="cm-line"><span class="cm-keyword">def</span> <span class="cm-def">get_score</span>(<span class="cm-variable">url</span>):
+</span><span class="cm-line">    <span class="cm-comment"># 利用 open() 與 read() 讀取考試結果 JSON 檔案</span>
+</span><span class="cm-line">    <span class="cm-variable">json_data</span> <span class="cm-operator">=</span> <span class="cm-builtin">open</span>(<span class="cm-variable">url</span>).<span class="cm-property">read</span>()
+</span><span class="cm-line">    <span class="cm-comment"># 利用 ast.literal_eval() 將字串 dict, 轉為程式可用的 dict 資料型別</span>
+</span><span class="cm-line">    <span class="cm-variable">big_dict</span> <span class="cm-operator">=</span> <span class="cm-variable">ast</span>.<span class="cm-property">literal_eval</span>(<span class="cm-variable">json_data</span>)
+</span><span class="cm-line">    <span class="cm-comment"># 從 big_dict 中, 取出 body 中的 testuser 欄位資料</span>
+</span><span class="cm-line">    <span class="cm-variable">data</span> <span class="cm-operator">=</span> <span class="cm-variable">big_dict</span>[<span class="cm-string">"body"</span>][<span class="cm-string">"testuser"</span>]
+</span><span class="cm-line">    <span class="cm-comment"># 定義一個空 dict 資料變數, 隨後利用迴圈逐一將學號作為 key, 考試成績為 valude</span>
+</span><span class="cm-line">    <span class="cm-comment"># 組成 quiz_dict 的資料內容, 以便之後可以用學號當作輸入, 取得該員考試成績</span>
+</span><span class="cm-line">    <span class="cm-variable">quiz_dict</span> <span class="cm-operator">=</span> {}
+</span><span class="cm-line">    <span class="cm-keyword">for</span> <span class="cm-variable">i</span> <span class="cm-keyword">in</span> <span class="cm-variable">data</span>:
+</span><span class="cm-line">        <span class="cm-comment"># data 資料中的 user_name 為考試學員的帳號, 也就是學號</span>
+</span><span class="cm-line">        <span class="cm-variable">stud_id</span> <span class="cm-operator">=</span> <span class="cm-variable">data</span>[<span class="cm-variable">i</span>][<span class="cm-string">"user_name"</span>]
+</span><span class="cm-line">        <span class="cm-comment"># data 資料中的 total_score 欄位為考試成績</span>
+</span><span class="cm-line">        <span class="cm-comment"># 因為考試成績為字串, 先轉為浮點數後, 再轉為整數</span>
+</span><span class="cm-line">        <span class="cm-variable">stud_score</span> <span class="cm-operator">=</span> <span class="cm-builtin">int</span>(<span class="cm-builtin">float</span>(<span class="cm-variable">data</span>[<span class="cm-variable">i</span>][<span class="cm-string">"total_score"</span>]))
+</span><span class="cm-line">        <span class="cm-comment"># 逐一以學號為 key, 考試成績為對應 value, 將資料放入 quiz_dict</span>
+</span><span class="cm-line">        <span class="cm-variable">quiz_dict</span>[<span class="cm-variable">stud_id</span>] <span class="cm-operator">=</span> <span class="cm-variable">stud_score</span>
+</span><span class="cm-line">    <span class="cm-comment"># 取得各學員的考試成績 quiz_dict 後, 將資料傳回</span>
+</span><span class="cm-line">    <span class="cm-keyword">return</span> <span class="cm-variable">quiz_dict</span>
+</span><span class="cm-line">
+</span><span class="cm-line"><span class="cm-comment"># 從考試 JSON 檔案中取得考試結果的字典資料</span>
+</span><span class="cm-line"><span class="cm-variable">cp_quiz</span> <span class="cm-operator">=</span> <span class="cm-variable">get_score</span>(<span class="cm-variable">cp_w10_quiz_url</span>)
+</span><span class="cm-line"><span class="cm-comment"># 設定一個空數列, 隨後將利用 append() 方法, 將缺考學員學號存入</span>
+</span><span class="cm-line"><span class="cm-variable">cp_abs</span> <span class="cm-operator">=</span> []
+</span><span class="cm-line"><span class="cm-comment"># 從修課學員數列中, 逐一按照學號次序, 以重複迴圈將學號對應至 stud 變數</span>
+</span><span class="cm-line"><span class="cm-keyword">for</span> <span class="cm-variable">stud</span> <span class="cm-keyword">in</span> <span class="cm-variable">cp_stud</span>:
+</span><span class="cm-line">    <span class="cm-comment"># 因為缺考學員在考試結果的 dict 中並無資料, 因此利用 try except 進行判斷</span>
+</span><span class="cm-line">    <span class="cm-keyword">try</span>:
+</span><span class="cm-line">        <span class="cm-comment"># 針對 stud 學號, 有考試成績者, 列出其學號與得分</span>
+</span><span class="cm-line">        <span class="cm-builtin">print</span>(<span class="cm-variable">stud</span>, <span class="cm-variable">cp_quiz</span>[<span class="cm-variable">stud</span>])
+</span><span class="cm-line">    <span class="cm-keyword">except</span>:
+</span><span class="cm-line">        <span class="cm-comment"># 缺考者沒有 quiz 成績, 則在其成績欄位印出"缺"</span>
+</span><span class="cm-line">        <span class="cm-builtin">print</span>(<span class="cm-variable">stud</span>, <span class="cm-string">"缺"</span>)
+</span><span class="cm-line">        <span class="cm-comment"># 同時將缺考學員學號以 append() 方法逐一置入</span>
+</span><span class="cm-line">        <span class="cm-variable">cp_abs</span>.<span class="cm-property">append</span>(<span class="cm-variable">stud</span>)
+</span><span class="cm-line"><span class="cm-comment"># 列出缺考名單</span>
+</span><span class="cm-line"><span class="cm-builtin">print</span>(<span class="cm-string">"="</span><span class="cm-operator">*</span><span class="cm-number">20</span>)
+</span><span class="cm-line"><span class="cm-builtin">print</span>(<span class="cm-string">"以下為 w14 缺考名單:"</span>)
+</span><span class="cm-line"><span class="cm-comment"># 因為 cp_abs 資料為 list, 在此利用 for 迴圈逐一列出</span>
+</span><span class="cm-line"><span class="cm-keyword">for</span> <span class="cm-variable">stud</span> <span class="cm-keyword">in</span> <span class="cm-variable">cp_abs</span>:
+</span><span class="cm-line">    <span class="cm-builtin">print</span>(<span class="cm-variable">stud</span>)</span></pre>
+</div>
+<p>以下為 w14 缺考名單:<br/>41123209<br/>41123211<br/>41123218<br/>41123219<br/>41123225<br/>41123227<br/>41123228<br/>41123232<br/>41123236<br/>41123240<br/>41123247<br/>&lt;completed in 953.00 ms&gt;</p>
+<br />w13 << <a href='w13.html'>Previous</a> <a href='w15.html'>Next</a> >> w15</div>
         
     <!-- footer -->
       <div class="container">
