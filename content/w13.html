@@ -144,9 +144,21 @@ img.add_border {
     <div id="tipue_search_content">HW << <a href='HW.html'>Previous</a> <a href='w14.html'>Next</a> >> w14<br /><h1>w13</h1>
 <p>華氏 = 9/5*攝氏+32</p>
 <p>攝氏 = (華氏-32)* 5/9</p>
-<p>溫度轉換範例</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"></pre>
-<br />HW << <a href='HW.html'>Previous</a> <a href='w14.html'>Next</a> >> w14</div>
+<div style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Web', sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;">
+<div class="code-snippet-card__body" ng-class="{'code-snippet-card__body--wrapped': csCard.card.wrap}">
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">'''
+f = c*9/5 + 32
+c = (f-32)*5/9
+'''
+c = input("請輸入攝氏溫度值")
+c = float(c)
+#print(c, type(c))
+f = c*9/5 + 32
+print(c, f)</pre>
+<pre><code class="CodeMirror cm-s-eclipse language-python" ng-bind-html="::csCard.card.snippet"><span class="cm-line"></span></code>溫度轉換範例</pre>
+</div>
+</div>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"></pre><br />HW << <a href='HW.html'>Previous</a> <a href='w14.html'>Next</a> >> w14</div>
         
     <!-- footer -->
       <div class="container">
